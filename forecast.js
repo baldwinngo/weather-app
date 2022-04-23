@@ -22,6 +22,6 @@ const getWeather = async (locationKey) => {
   const response = await fetch(resourceBase + resourceQuery);
   const data = await response.json();
 
+  return (data[0])
 }
 
-console.log(getCity(city).then(data => data))
