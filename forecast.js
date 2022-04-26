@@ -10,7 +10,7 @@ const getCity = async (city) => {
   const response = await fetch(resourceBase + resourceQuery);
   const data = await response.json();
 
-  return (data[0].Key)
+  return (data[0])
 }
 
 

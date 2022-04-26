@@ -1,23 +1,32 @@
 const searchForm = document.querySelector('.search');
 const searchBar = document.querySelector('#search-bar');
+const cityName = document.querySelector('.city');
+const cityCondition = document.querySelector('.city-condition');
+const cityTemp = document.querySelector('.city-temp');
 
-const cityWeather = async (city) => {
-
-  const locationKey = await getCity(city);
-  const data = await getWeather(locationKey);
-
-  return {data}
+const updateWeather = (data) => {
+  cityName.textContent = `${data.location.EnglishName}`
+  cityCondition.textContent = `${data.weather.WeatherText}`
+  cityTemp.textContent = `${data.weather.Temperature.Imperial.Value}`
 }
 
-searchForm.addEventListener('submit', (e) => {
+const getWeatherData = async (city) => {
+
+  const location = await getCity(city);
+  const weather = await getWeather(location.Key);
+
+  return {location, weather}
+}
+
+searchForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  cityWeather(searchBar.value.trim()).then(data => {
-    const temp = data.data.Temperature.Imperial.Value 
-    const weather = data.data.WeatherText
+  getWeatherData(searchBar.value.trim()).then(data => {
+    updateWeather(data);
   })
 
-  console.log(temp, weather)
+
+
 
   searchForm.reset();
 })
