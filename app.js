@@ -24,10 +24,7 @@ searchForm.addEventListener('submit', e => {
   getWeatherData(searchBar.value.trim()).then(data => {
     updateWeather(data);
   })
-
-
-
-
+  
   searchForm.reset();
 })
 
